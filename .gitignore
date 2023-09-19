@@ -1,0 +1,9 @@
+/bin
+/include
+/lib
+/lib64
+/pwntools-doc
+/pyvenv.cfg
+/gathering_data/temp.py
+/dataset/Google-Playstore.csv
+/activate.sh
