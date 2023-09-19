@@ -2,12 +2,15 @@ import json
 import os
 import natsort
 
-JSON_FILENAME = ("gathering_data/", "list_validity.json")
-JSON_FILE_DIRECTORY = "gathering_data/dataset/"
+JSON_FILENAME = ("dataset/on_playstore.json", "dataset/not_on_playstore.json")
+JSON_FILE_DIRECTORY = "dataset/playstore_temp/"
 
 def merge(jf1, jf2):
-    for key in ["valid_links"], ["invalid_links"]:
-        jf1[key].update(jf2[key])
+    for key in jf2.keys():
+        if key in jf1:
+            jf1[key].update(jf2[key])
+        else:
+            jf1[key] = jf2[key]
 
 def main():
     jf = {}
@@ -21,13 +24,23 @@ def main():
                     jf = json.load(f)
             print(f"Done")
 
-    for key in jf["count"]:
-        jf["count"][key] = len(jf[key])
+    if "error" in jf and not jf["error"]:
+        del jf["error"]
+    if "error" in jf["count"] and not jf["count"]["error"]:
+        del jf["count"]["error"]
+    if "error" in jf["count"] or "error" in jf:
+        raise Exception("Error present")
 
-    print(f"\nWriting to {JSON_FILENAME[0] + JSON_FILENAME[1]}...", end='')
-    with open(JSON_FILENAME[0] + JSON_FILENAME[1], 'w+') as f:
-        json.dump(jf, f, indent=2)
-    print(f"Done")
+    new_jf = []
+    for key in jf:
+        if key == "count": continue
+        new_jf.append({"count": len(jf[key]), "links": jf[key]})
+    
+    for i in range(len(new_jf)):
+        print(f"\nWriting to {JSON_FILENAME[i]}...", end='')
+        with open(JSON_FILENAME[i], 'w+') as f:
+            json.dump(new_jf[i], f, indent=2)
+        print(f"Done")
 
 if __name__ == '__main__':
     main()

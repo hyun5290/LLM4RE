@@ -9,7 +9,7 @@ CSV_FILENAME = "dataset/Google-Playstore.csv"
 JSON_FILENAME = ("dataset/playstore_temp/list_validity_", ".json")
 PLAYSTORE_URL = 'https://play.google.com/store/apps/details?id='
 HEADERS = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'}
-START, END = 2, 2312946  # line number in CSV to start and end [start,end)
+START, END = 2, 2312945  # line number in CSV to start and end, both ends inclusive
 JSON_FILE_SIZE = 5000  # how many items per json file
 WRITE_FREQUENCY = 200  # update json every WRITE_FREQUENCY items
 PROCESS_CHECK_FREQUENCY = 60  # how often to check if processes alive in seconds
