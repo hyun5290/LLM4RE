@@ -6,4 +6,5 @@
 /pyvenv.cfg
 /gathering_data/temp.py
 /dataset/Google-Playstore.csv
+/dataset/playstore_temp
 /activate.sh

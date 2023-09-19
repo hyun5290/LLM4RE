@@ -6,10 +6,8 @@ JSON_FILENAME = ("gathering_data/", "list_validity.json")
 JSON_FILE_DIRECTORY = "gathering_data/dataset/"
 
 def merge(jf1, jf2):
-    for key in jf1:
-        if isinstance(jf1[key], dict) and key in jf2:
-            merge(jf1[key], jf2[key])
-            jf1[key].update(jf2[key])
+    for key in ["valid_links"], ["invalid_links"]:
+        jf1[key].update(jf2[key])
 
 def main():
     jf = {}
@@ -22,8 +20,10 @@ def main():
                 else:
                     jf = json.load(f)
             print(f"Done")
+
     for key in jf["count"]:
-        
+        jf["count"][key] = len(jf[key])
+
     print(f"\nWriting to {JSON_FILENAME[0] + JSON_FILENAME[1]}...", end='')
     with open(JSON_FILENAME[0] + JSON_FILENAME[1], 'w+') as f:
         json.dump(jf, f, indent=2)
