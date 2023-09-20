@@ -1,8 +1,8 @@
 import json
 import sys
 
-INPUT_FILENAME = "dataset/not_on_playstore.json"
-OUTPUT_FILENAME = ("dataset/not_on_playstore-", ".json")
+INPUT_FILENAME = "dataset/on_playstore.json"
+OUTPUT_FILENAME = ("dataset/on_playstore-", ".json")
 
 def main():
     print(f"Reading {INPUT_FILENAME}...", end='')

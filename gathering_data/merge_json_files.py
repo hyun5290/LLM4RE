@@ -29,12 +29,12 @@ def main():
     if "error" in jf["count"] and not jf["count"]["error"]:
         del jf["count"]["error"]
     if "error" in jf["count"] or "error" in jf:
-        raise Exception("Error present")
+        raise Exception("Links with error present")
 
     new_jf = []
     for key in jf:
         if key == "count": continue
-        new_jf.append({"count": len(jf[key]), "links": jf[key]})
+        new_jf.append({"count": len(jf[key]), "apps": jf[key]})
     
     for i in range(len(new_jf)):
         print(f"\nWriting to {OUTPUT_FILENAME[i]}...", end='')
