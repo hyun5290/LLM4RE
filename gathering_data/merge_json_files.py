@@ -2,8 +2,8 @@ import json
 import os
 import natsort
 
-JSON_FILENAME = ("dataset/on_playstore.json", "dataset/not_on_playstore.json")
-JSON_FILE_DIRECTORY = "dataset/playstore_temp/"
+OUTPUT_FILENAME = ("dataset/on_playstore.json", "dataset/not_on_playstore.json")
+INPUT_FILE_DIRECTORY = "dataset/playstore_temp/"
 
 def merge(jf1, jf2):
     for key in jf2.keys():
@@ -14,10 +14,10 @@ def merge(jf1, jf2):
 
 def main():
     jf = {}
-    for filename in natsort.os_sorted(os.listdir(JSON_FILE_DIRECTORY)):
-        if filename.endswith(".json") and filename != JSON_FILENAME[1]:
+    for filename in natsort.os_sorted(os.listdir(INPUT_FILE_DIRECTORY)):
+        if filename.endswith(".json") and filename != OUTPUT_FILENAME[1]:
             print(f"Merging {filename}...", end='')
-            with open(JSON_FILE_DIRECTORY + filename, 'r') as f:
+            with open(INPUT_FILE_DIRECTORY + filename, 'r') as f:
                 if jf:
                     merge(jf, json.load(f))
                 else:
@@ -37,8 +37,8 @@ def main():
         new_jf.append({"count": len(jf[key]), "links": jf[key]})
     
     for i in range(len(new_jf)):
-        print(f"\nWriting to {JSON_FILENAME[i]}...", end='')
-        with open(JSON_FILENAME[i], 'w+') as f:
+        print(f"\nWriting to {OUTPUT_FILENAME[i]}...", end='')
+        with open(OUTPUT_FILENAME[i], 'w+') as f:
             json.dump(new_jf[i], f, indent=2)
         print(f"Done")
 

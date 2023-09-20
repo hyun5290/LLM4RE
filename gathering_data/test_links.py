@@ -6,7 +6,7 @@ import os
 import time
 
 CSV_FILENAME = "dataset/Google-Playstore.csv"
-JSON_FILENAME = ("dataset/playstore_temp/list_validity_", ".json")
+OUTPUT_FILENAME = ("dataset/playstore_temp/list_validity_", ".json")
 PLAYSTORE_URL = 'https://play.google.com/store/apps/details?id='
 HEADERS = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'}
 START, END = 2, 2312945  # line number in CSV to start and end, both ends inclusive
@@ -26,7 +26,7 @@ def check(app_id):
         return type(e), e
 
 def get_json_filename(ind):
-    return f"{JSON_FILENAME[0]}{str(ind // JSON_FILE_SIZE * JSON_FILE_SIZE)}-{str((ind // JSON_FILE_SIZE + 1) * JSON_FILE_SIZE - 1)}{JSON_FILENAME[1]}"
+    return f"{OUTPUT_FILENAME[0]}{str(ind // JSON_FILE_SIZE * JSON_FILE_SIZE)}-{str((ind // JSON_FILE_SIZE + 1) * JSON_FILE_SIZE - 1)}{OUTPUT_FILENAME[1]}"
 
 class TestLinks:
     def __init__(self, csv_filename, shm_name):
